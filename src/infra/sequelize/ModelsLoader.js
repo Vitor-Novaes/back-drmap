@@ -16,12 +16,6 @@ module.exports = {
         loaded[modelName] = model;
       });
 
-    Object.keys(loaded).forEach((modelName) => {
-      if (loaded[modelName].associate) {
-        loaded[modelName].associate(loaded);
-      }
-    });
-
     loaded.database = sequelize;
     loaded.Sequelize = Sequelize;
 

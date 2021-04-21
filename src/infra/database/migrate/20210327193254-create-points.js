@@ -14,7 +14,7 @@ module.exports = {
       },
       completedDate: {
         field: 'completed_date',
-        type: DataTypes.DATETIME
+        type: DataTypes.DATE
       },
       markAsDone: {
         field: 'mark_as_done',

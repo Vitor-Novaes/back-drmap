@@ -14,8 +14,26 @@ const errorHandler = require('./interfaces/http/errors/errorHandler');
 const devErrorHandler = require('./interfaces/http/errors/devErrorHandler');
 const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware');
 
-// const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
-const { database } = require('./infra/database/models');
+const {
+  GetAllRoadmaps,
+  CreateRoadmap,
+} = require('src/app/roadmap');
+
+const {
+  Lambdas,
+  PublicService,
+} = require('src/infra/services');
+
+const SequelizeRoadmapRepository = require('./infra/roadmap/SequelizeRoadmapRepository');
+//const SequelizePointRepository = require('./infra/point/SequelizePointRepository');
+//const SequelizeTaskRepository = require('./infra/task/SequelizeTaskRepository');
+
+const {
+  database,
+  Points,
+  Roadmaps,
+  Tasks,
+} = require('./infra/database/models');
 
 const container = createContainer();
 
@@ -48,19 +66,27 @@ container
 
 // Repositories
 container.register({
-  // usersRepository: asClass(SequelizeUsersRepository).singleton()
+  roadmapRepository: asClass(SequelizeRoadmapRepository).singleton()
+});
+
+// Services
+container.register({
+  lambdas: asClass(Lambdas).singleton(),
+  plubicService: asClass(PublicService).singleton(),
 });
 
 // Database
 container.register({
   database: asValue(database),
-  // UserModel: asValue(UserModel)
+  RoadmapModel: asValue(Roadmaps),
+  PointModel: asValue(Points),
+  TaskModel: asValue(Tasks),
 });
 
 // Operations
 container.register({
-  // createUser: asClass(CreateUser),
-  // getAllUsers: asClass(GetAllUsers),
+  getAllRoadmaps: asClass(GetAllRoadmaps),
+  createRoadmap: asClass(CreateRoadmap),
   // getUser: asClass(GetUser),
   // updateUser: asClass(UpdateUser),
   // deleteUser: asClass(DeleteUser)

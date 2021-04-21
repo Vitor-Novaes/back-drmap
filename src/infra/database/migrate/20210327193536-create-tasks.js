@@ -16,7 +16,7 @@ module.exports = {
         type: DataTypes.STRING,
       },
       moment: {
-        type: DataTypes.DATETIME,
+        type: DataTypes.DATE,
         allowNull: false,
       },
       markAsDone: {

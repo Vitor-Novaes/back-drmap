@@ -28,6 +28,7 @@
   "dependencies": {
     "awilix": "^4.2.6",
     "awilix-express": "^4.0.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
