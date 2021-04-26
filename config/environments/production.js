@@ -1,6 +1,6 @@
 module.exports = {
   web: {
-    port: process.env.PORT
+    port: 44591
   },
   logging: {
     appenders: [

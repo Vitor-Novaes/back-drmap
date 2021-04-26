@@ -12,10 +12,6 @@ class Lambdas {
   async getAllRoadmaps() {
     return this.instance.get('/roadmap');
   }
-
-  async getRoadmap(id) {
-    return this.instance.get(`/roadmap?id=${id}`);
-  }
 }
 
 module.exports = Lambdas;

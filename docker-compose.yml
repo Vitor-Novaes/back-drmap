@@ -1,0 +1,41 @@
+version: '3'
+
+volumes:
+  drm-db:
+    driver: 'local'
+
+services:
+  base: &base
+    hostname: 'host_drm'
+    image: 'drm_api'
+    stdin_open: true
+    tty: true
+    build:
+      context: '.'
+      dockerfile: './dev.Dockerfile'
+
+  db:
+    hostname: 'host_drm_db'
+    container_name: 'db_drm'
+    image: 'postgres:11-alpine'
+    volumes:
+      - 'drm-db:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_DATABASE: 'DRM'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'psw1234'
+    ports:
+      - 5432:5432
+
+  app: &app
+    <<: *base
+    hostname: 'host_drm_app'
+    container_name: 'app_drm'
+    command: 'npm run dev'
+    environment:
+      POSTGRES_HOSTNAME: host_drm_db
+      NODE_ENV: development
+    depends_on:
+      - db
+    ports:
+      - 3000:80

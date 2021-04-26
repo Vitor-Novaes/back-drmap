@@ -10,10 +10,8 @@ class PublicService {
   }
 
   async getDataByRoadmapCode(code) {
-    const points = await this.instance.get(`${code}/points.csv`);
-    const tasks = await this.instance.get(`${code}/tasks.csv`);
-    console.log(points);
-    console.log(tasks);
+    const points = await this.instance.get(`/${code}/points.csv`);
+    const tasks = await this.instance.get(`/${code}/tasks.csv`);
     return { points, tasks };
   }
 }

@@ -1,16 +1,16 @@
 const Operation = require('src/app/Operation');
 
 class GetAllRoadmaps extends Operation {
-  constructor({ roadmapRepository }) {
+  constructor({ lambdas }) {
     super();
-    this.roadmapRepository = roadmapRepository;
+    this.lambdas = lambdas;
   }
 
   async execute() {
     const { SUCCESS, ERROR } = this.outputs;
 
     try {
-      const roadmaps = await this.roadmapRepository.getAll();
+      const roadmaps = await this.lambdas.getAllRoadmaps().body;
 
       this.emit(SUCCESS, roadmaps);
     } catch(error) {

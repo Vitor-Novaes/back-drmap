@@ -21,8 +21,9 @@ class CreateRoadmap extends Operation {
     const { SUCCESS, ERROR, VALIDATION_ERROR } = this.outputs;
 
     try {
-
-      const roadmap = await this.lambdas.getRoadmap(roadmapData.id);
+      const roadmap = await this.lambdas.getAllRoadmaps()
+        .body.filter(roadmap => roadmap.id = roadmapData.id);
+      console.log(roadmap);
       const data = await this.publicService.getDataByRoadmapCode(roadmap.publicService);
       console.log(data);
 
